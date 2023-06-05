@@ -33,7 +33,7 @@ date_end = np.datetime64(date_end.strftime('%Y-%m-%d'))
 
 period_sampling = 1
 period_rb = 1
-exchange_name = "HSX"
+# exchange_name = "HSX"
 context_order = {'TYPE': backtestdb_name,
                  'LEVEL': 1,
                  'UNIVERSE': universe_name,
@@ -46,7 +46,7 @@ context = Context(context_order)
 date_eval_all = context.get_date_eval_all()
 
 local_dtb_dir = get_local_dtb_dir(backtestdb_name)
-ticker_universe_list = load_ticker_universe(local_dtb_dir, "2021-HOSE")
+ticker_universe_list = load_ticker_universe(local_dtb_dir, universe_name)
 
 #%%
 # ********************************************************* 
