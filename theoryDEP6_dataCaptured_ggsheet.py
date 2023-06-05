@@ -16,7 +16,6 @@ import pygsheets
 from datetime import datetime, time
 
 #%%
-# Use vnindex to identify which dates have available data 
 backtestdb_name = "update18"
 db_folder_name = 'DATABASEv18'
 universe_name = "FIREANT"
