@@ -10,7 +10,6 @@ from amethystway.date_utils import *
 from amethystway.trading_blocks import *
 from amethystway.metric_generator import *
 import datetime as dt
-from ha_modelling_function import * 
 import pygsheets
 
 from datetime import datetime, time
