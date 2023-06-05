@@ -33,8 +33,6 @@ date_end = np.datetime64(date_end.strftime('%Y-%m-%d'))
 
 period_sampling = 1
 period_rb = 1
-# backtestdb_name = 'update18'
-# universe_name = 'FIREANT'
 exchange_name = "HSX"
 context_order = {'TYPE': backtestdb_name,
                  'LEVEL': 1,
