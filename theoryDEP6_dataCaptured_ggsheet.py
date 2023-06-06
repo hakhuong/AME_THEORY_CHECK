@@ -541,7 +541,7 @@ return_df = return_obj.get_df()
 # ********************************************************* 
 # --------------------UPLOAD TO GGSHEET--------------------
 # ********************************************************* 
-dep6_history_portf_df = assign_df[[K_DATE_TRADING, K_TICKER, K_ASSIGN]].copy()
+dep6_history_portf_df = assign_df[[K_DATE_TRADING, K_TICKER, K_ASSIGN, K_MARK_STATUS]].copy()
 
 project_dir = os.getcwd()
 save_dir = os.path.join(project_dir, "ggsheet_key")
