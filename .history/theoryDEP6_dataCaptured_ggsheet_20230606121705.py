@@ -184,6 +184,7 @@ for date in date_eval_all:
     for file_name in files:
         # print(file_name)
 
+
         if "-TIME_STAMP_" in file_name:
             date_obj = file_name.split("-TIME_STAMP_")[1].split("-")[0].split('_')[0]
         else:
@@ -504,7 +505,8 @@ s_out_obj.generate_signal_from_logic(s_out_list, s_out_logic)
 ### WATCHLIST / POSITION  ###
 #----------------------------------------------------------
 watchlist_pos = Position()
-watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+# watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+watchlist_pos.generate_position_from_s_io_in_first(s_in_obj, s_out_obj)
 watchlist_pos_df = watchlist_pos.get_df()
 
 #----------------------------------------------------------

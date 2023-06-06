@@ -59,6 +59,8 @@ onedrive_dir = os.path.expandvars("%OneDriveConsumer%")
 files_path =  os.path.join(onedrive_dir, f"Amethyst Invest\Database\{db_folder_name}\OPERATION_DATA_CAPTURE")
 files = os.listdir(files_path)
 
+
+
 ema_pha_in_name  = "PHA-EMA_60D"
 ema_pha_out_name  = "PHA-EMA_20D"
 ranking_pca_rv_name  = 'PCA-RV_60D'
@@ -183,6 +185,7 @@ for date in date_eval_all:
     # print(date_identifier)
     for file_name in files:
         # print(file_name)
+
 
         if "-TIME_STAMP_" in file_name:
             date_obj = file_name.split("-TIME_STAMP_")[1].split("-")[0].split('_')[0]
@@ -504,7 +507,8 @@ s_out_obj.generate_signal_from_logic(s_out_list, s_out_logic)
 ### WATCHLIST / POSITION  ###
 #----------------------------------------------------------
 watchlist_pos = Position()
-watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+# watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+watchlist_pos.generate_position_from_s_io_in_first(s_in_obj, s_out_obj)
 watchlist_pos_df = watchlist_pos.get_df()
 
 #----------------------------------------------------------

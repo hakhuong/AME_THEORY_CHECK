@@ -50,14 +50,15 @@ ticker_universe_list = load_ticker_universe(local_dtb_dir, universe_name)
 
 #%%
 # ********************************************************* 
-#-------------------LOAD INDICATOR ------------------------
+#--------------LOAD INDICATOR & TRANSFORM------------------
 # ********************************************************* 
 
 onedrive_dir = os.path.expandvars("%OneDriveConsumer%")
-
 # Get list of files in folder
 files_path =  os.path.join(onedrive_dir, f"Amethyst Invest\Database\{db_folder_name}\OPERATION_DATA_CAPTURE")
 files = os.listdir(files_path)
+
+
 
 ema_pha_in_name  = "PHA-EMA_60D"
 ema_pha_out_name  = "PHA-EMA_20D"
@@ -184,18 +185,23 @@ for date in date_eval_all:
     for file_name in files:
         # print(file_name)
 
+
         if "-TIME_STAMP_" in file_name:
             date_obj = file_name.split("-TIME_STAMP_")[1].split("-")[0].split('_')[0]
         else:
             date_obj = file_name[-16:-10]
 
-        if date_identifier  == date_obj: # Xét nếu date_identifier xuất hiện trong tên --- phải thêm xét sau TIME STAMP           
+        if date_identifier  == date_obj: # Xét nếu date_identifier xuất hiện trong tên --- phải thêm xét sau TIME STAMP 
+            # if 'VOLM-MA_70D-B_1D-RH-230427_094526' in file_name:
+            #     print('------------', file_name)            
         
             if "-TIME_STAMP_" in file_name:
                 timestamp_str = file_name.split("-TIME_STAMP_")[1].split("-")[0].split('_')[1]  # extract timestamp from filename
 
             else:
                 timestamp_str = file_name.split("_")[-1][:-3]  # extract timestamp from filename
+                # if 'VOLM' in file_name:
+                #     print(file_name)
 
             timestamp_obj = datetime.strptime(timestamp_str, '%H%M%S').time()  # convert timestamp string to datetime object
 
@@ -205,6 +211,7 @@ for date in date_eval_all:
             elif (timestamp_obj > time(15, 0, 0)) &  (timestamp_obj < time(15, 30, 0)):
                 model_files_list.append(file_name)
 
+            # print(file_name)
 
 
 ema_pha_in_filename_list = [x for x in model_files_list if  x.startswith(ema_pha_in_name)]
@@ -504,7 +511,8 @@ s_out_obj.generate_signal_from_logic(s_out_list, s_out_logic)
 ### WATCHLIST / POSITION  ###
 #----------------------------------------------------------
 watchlist_pos = Position()
-watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+# watchlist_pos.generate_position_from_s_io_out_first(s_in_obj, s_out_obj)
+watchlist_pos.generate_position_from_s_io_in_first(s_in_obj, s_out_obj)
 watchlist_pos_df = watchlist_pos.get_df()
 
 #----------------------------------------------------------
