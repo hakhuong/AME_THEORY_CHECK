@@ -512,9 +512,9 @@ watchlist_pos_df = watchlist_pos.get_df()
 #----------------------------------------------------------
 ranking_indi_list = [ranking_pca_rv_indicator, ranking_pha_sd_reci_indicator,  ranking_drawdown_indicator]
 total_slot = 15
-tsplus_length = 3
+tsplus_length = 2
 assign_obj = Assign()
-assign_obj = apply_assign_HAI_v3_new(watchlist_pos, ranking_indi_list, total_slot, tsplus_length, gr_1d_indi_run = pca_gr_1d)
+assign_obj = apply_assign_HAI_v3_new(watchlist_pos, ranking_indi_list, total_slot, tsplus_length, gr_1d_indi_run = pca_gr_1d )
 
 assign_df = assign_obj.get_df()
 
@@ -576,3 +576,40 @@ upload_df_to_ggsheet(client_ggsheet, table_name, dep6_history_portf_df, "PORTFOL
 return_upload_df = add_time_stamp_to_df(return_df[[K_DATE_TRADING, K_RETURN_PORTFOLIO, K_TICKER_COUNT]].copy())
 upload_df_to_ggsheet(client_ggsheet, table_name, return_upload_df, "PORT_RETURN")
 # %%
+# #%%
+# port_all_indi_df = watchlist_pos_df[watchlist_pos_df[K_POSITION]==1].merge(all_indi_df, on = [K_TICKER, K_DATE_TRADING], how = 'left')
+# r1 = Indicator()
+# r1.assign_indicator_df(port_all_indi_df[[K_TICKER, K_DATE_TRADING, ranking_drawdown_name]])
+# r1.generate_indicator_rank_horizontal(method="dense", ascending=False, pct=False)
+# r1_df = r1.get_df()
+
+
+# r2 = Indicator()
+# r2.assign_indicator_df(port_all_indi_df[[K_TICKER, K_DATE_TRADING, ranking_pca_rv_name]])
+# r2.generate_indicator_rank_horizontal(method="dense", ascending=False, pct=False)
+# r2_df = r2.get_df()
+
+# r3 = Indicator()
+# r3.assign_indicator_df(port_all_indi_df[[K_TICKER, K_DATE_TRADING, ranking_pha_sd_reci_name]])
+# r3.generate_indicator_rank_horizontal(method="dense", ascending=False, pct=False)
+# r3_df = r3.get_df()
+
+
+
+# # %%
+# r1_df[(r1_df[K_DATE_TRADING] == '2023-06-05') & (r1_df[K_TICKER].isin(['SSI', 'PLX', 'SHB']))]
+# # %%
+# r2_df[(r2_df[K_DATE_TRADING] == '2023-06-05') & (r2_df[K_TICKER].isin(['SSI', 'PLX', 'SHB']))]
+# # %%
+# r3_df[(r3_df[K_DATE_TRADING] == '2023-06-05') & (r3_df[K_TICKER].isin(['SSI', 'PLX', 'SHB']))]
+# # %%
+
+# big_df = (r1_df
+#           .merge(r2_df, on = [K_TICKER, K_DATE_TRADING], how = 'outer')
+#           .merge(r3_df, on = [K_TICKER, K_DATE_TRADING], how = 'outer')
+#           )
+# big_df = big_df.merge(all_indi_df[[K_TICKER, K_DATE_TRADING, ranking_drawdown_name, ranking_pha_sd_reci_name, ranking_pca_rv_name]], on = [K_TICKER, K_DATE_TRADING], how = 'left')
+# big_df = big_df[big_df[K_DATE_TRADING]=='2023-06-06']
+
+# # %%
+# big_df.to_excel()
